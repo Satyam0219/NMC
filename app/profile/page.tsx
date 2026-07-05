@@ -1,3 +1,4 @@
+import LogoutButton from '@/components/LogoutButton'
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
@@ -55,11 +56,8 @@ export default async function ProfilePage() {
         </div>
         
         {/* Simple Logout Button */}
-        <form action="/auth/signout" method="post">
-          <button className="flex items-center gap-2 bg-white border border-gray-200 text-gray-700 px-5 py-2.5 rounded-full font-semibold text-sm hover:bg-gray-50 transition shadow-sm">
-            <LogOut className="w-4 h-4" /> Sign Out
-          </button>
-        </form>
+        {/* Simple Logout Button */}
+        <LogoutButton />
       </div>
 
       <div className="flex flex-col lg:flex-row gap-8">

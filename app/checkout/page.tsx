@@ -56,7 +56,7 @@ export default function CheckoutPage() {
       if (result.success) {
         toast.success('Order placed successfully!');
         clearCart();
-        router.push('/'); 
+        router.push('/success'); 
       } else {
         toast.error(result.error || 'Failed to place order');
       }
@@ -68,7 +68,7 @@ export default function CheckoutPage() {
         if (result.success) {
           toast.success('Payment successful! Order placed.');
           clearCart();
-          router.push('/');
+          router.push('/success');
         }
       }, 2000);
     }

@@ -1,39 +1,38 @@
 'use client';
-
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Package, ShoppingBag } from 'lucide-react';
+import { Package, ShoppingBag, Mail } from 'lucide-react'; // Added Mail icon
 
 export default function AdminTabs() {
   const pathname = usePathname();
 
-  return (
-    <div className="border-b border-gray-200 mb-8">
-      <nav className="-mb-px flex space-x-8">
-        <Link
-          href="/admin/products"
-          className={`whitespace-nowrap flex items-center py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
-            pathname.includes('/admin/products')
-              ? 'border-[#0F4C5C] text-[#0F4C5C]'
-              : 'border-transparent text-gray-500 hover:text-gray-900 hover:border-gray-300'
-          }`}
-        >
-          <Package className="mr-2 h-5 w-5" />
-          Manage Products
-        </Link>
+  const tabs = [
+    { name: 'Dashboard', href: '/admin', icon: ShoppingBag },
+    { name: 'Products', href: '/admin/products', icon: Package },
+    { name: 'Orders', href: '/admin/orders', icon: ShoppingBag },
+    { name: 'Messages', href: '/admin/messages', icon: Mail }, // <-- NEW TAB
+  ];
 
-        <Link
-          href="/admin/orders"
-          className={`whitespace-nowrap flex items-center py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
-            pathname.includes('/admin/orders')
-              ? 'border-[#0F4C5C] text-[#0F4C5C]'
-              : 'border-transparent text-gray-500 hover:text-gray-900 hover:border-gray-300'
-          }`}
-        >
-          <ShoppingBag className="mr-2 h-5 w-5" />
-          Manage Orders
-        </Link>
-      </nav>
+  return (
+    <div className="flex gap-4 mb-8 overflow-x-auto pb-2 scrollbar-none">
+      {tabs.map((tab) => {
+        const Icon = tab.icon;
+        const isActive = pathname === tab.href;
+        return (
+          <Link
+            key={tab.name}
+            href={tab.href}
+            className={`flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm transition-all whitespace-nowrap ${
+              isActive 
+                ? 'bg-black text-white shadow-sm' 
+                : 'bg-white text-gray-500 hover:bg-gray-50 border border-gray-200'
+            }`}
+          >
+            <Icon className="w-4 h-4" />
+            {tab.name}
+          </Link>
+        );
+      })}
     </div>
   );
 }
